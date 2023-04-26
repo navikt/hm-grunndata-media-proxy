@@ -32,7 +32,8 @@ open class ImageHandler {
 
     private fun resizeImage(imageUri: URI, boundary: Dimension): BufferedImage {
         val image = ImageIO.read(imageUri.toURL())
-        return resizeImage(image, boundary)
+        return if (image.width > boundary.width || image.height > boundary.height)
+            resizeImage(image, boundary) else image
     }
 
     private fun getScaledDimension(imageSize: Dimension, boundary: Dimension): Dimension {
