@@ -68,5 +68,4 @@ class ImageProxyController(private val imageHandler: ImageHandler,
     }
 }
 
-fun MutableHttpResponse<ByteArray>.cacheControl(maxAge: String)
-= this.header(CACHE_CONTROL, "public, immutable, max-age=$maxAge")
+fun MutableHttpResponse<ByteArray>.cacheControl(maxAge: String) = this.header(CACHE_CONTROL, "public, immutable, max-age=$maxAge")

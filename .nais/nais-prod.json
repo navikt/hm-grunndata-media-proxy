@@ -1,0 +1,5 @@
+{
+  "min_replicas": 2,
+  "max_replicas": 2,
+  "cdn_host": "cdn.dev.nav.no"
+}

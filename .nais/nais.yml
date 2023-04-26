@@ -1,0 +1,36 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: hm-grunndata-media-proxy
+  namespace: teamdigihot
+  labels:
+    team: teamdigihot
+spec:
+  image: {{ image }}
+  port: 8080
+  liveness:
+    path: /internal/isAlive
+    initialDelay: 10
+  readiness:
+    path: /internal/isReady
+    initialDelay: 10
+  replicas:
+    min: {{ min_replicas }}
+    max: {{ max_replicas }}
+    cpuThresholdPercentage: 50
+  resources:
+    limits:
+      memory: 2048Mi
+    requests:
+      cpu: 200m
+      memory: 128Mi
+  prometheus:
+    enabled: true
+    path: /internal/prometheus
+  env:
+    - name: MEDIA_STORAGE_CDNURL
+      value: "https://{{cdn_host}}/teamdigihot/grunndata/media/v1"
+  accessPolicy:
+    outbound:
+      external:
+        - host: "{{cdn_host}}"
