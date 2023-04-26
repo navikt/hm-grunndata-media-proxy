@@ -34,3 +34,7 @@ spec:
     outbound:
       external:
         - host: "{{cdn_host}}"
+  ingresses:
+  {{#each ingress as |url|}}
+     - {{url}}
+  {{/each}}

@@ -1,5 +1,6 @@
 {
   "min_replicas": 1,
   "max_replicas": 1,
-  "cdn_host": "cdn.dev.nav.no"
+  "cdn_host": "cdn.dev.nav.no",
+  "ingress": ["https://hm-imgproxy.ekstern.dev.nav.no", "https://hm-imgproxy.intern.dev.nav.no"]
 }
