@@ -11,6 +11,8 @@ tmp/
 *.iml
 *.ipr
 *.iws
+*.tmp
 .project
 .settings
 .classpath
+
