@@ -65,7 +65,7 @@ micronaut {
 }
 
 application {
-    mainClass.set("no.nav.hm.grunndata.media.Application")
+    mainClass.set("no.nav.hm.grunndata.media.proxy.Application")
 }
 
 java {
