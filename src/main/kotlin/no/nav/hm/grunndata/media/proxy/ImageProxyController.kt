@@ -26,46 +26,38 @@ class ImageProxyController(private val imageHandler: ImageHandler,
     }
 
     @Get(uri = "/img/${SMALL}w/{uri:.*}.jpg", produces = ["image/jpeg"])
-    suspend fun resizeSmallJpgImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
+    fun resizeSmallJpgImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
         val jpgUri = URI("$cdnUrl/$uri.jpg")
-        val path = request.path
-        LOG.debug("Request for $path")
-        return HttpResponse
-            .ok(imageHandler.createCachedImageVersion(path,jpgUri, Dimension(SMALL, SMALL)))
-            .cacheControl(MAX_AGE)
+        return createCachedImageVersion(request, jpgUri, Dimension(SMALL, SMALL))
     }
 
     @Get(uri = "/img/${SMALL}w/{uri:.*}.png", produces = ["image/png"])
-    suspend fun resizeSmallPngImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
+    fun resizeSmallPngImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
         val pngUri = URI("$cdnUrl/$uri.png")
-        val path = request.path
-        LOG.debug("Request for $path")
-        return HttpResponse
-            .ok(imageHandler.createCachedImageVersion(path,pngUri, Dimension(SMALL, SMALL)))
-            .cacheControl(MAX_AGE)
+        return createCachedImageVersion(request, pngUri, Dimension(SMALL, SMALL))
 
     }
 
     @Get(uri = "/img/${LARGE}w/{uri:.*}.jpg", produces = ["image/jpeg"])
-    suspend fun resizeLargeJpgImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
+    fun resizeLargeJpgImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
         val jpgUri = URI("$cdnUrl/$uri.jpg")
-        val path = request.path
-        LOG.debug("Request for $path")
-        return HttpResponse
-            .ok(imageHandler.createCachedImageVersion(path,jpgUri, Dimension(LARGE, LARGE)))
-            .cacheControl(MAX_AGE)
+        return createCachedImageVersion(request, jpgUri, Dimension(LARGE, LARGE))
     }
 
     @Get(uri = "/img/${LARGE}w/{uri:.*}.png", produces = ["image/png"])
-    suspend fun resizeLargePngImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
+    fun resizeLargePngImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
         val pngUri = URI("$cdnUrl/$uri.png")
-        val path = request.path
-        LOG.debug("Request for $path")
-        return HttpResponse
-            .ok(imageHandler.createCachedImageVersion(path,pngUri, Dimension(LARGE, LARGE)))
-            .cacheControl(MAX_AGE)
+        return createCachedImageVersion(request, pngUri, Dimension(LARGE, LARGE))
 
     }
-}
 
-fun MutableHttpResponse<ByteArray>.cacheControl(maxAge: String) = this.header(CACHE_CONTROL, "public, immutable, max-age=$maxAge")
+    private fun createCachedImageVersion(request: HttpRequest<*>,
+                                         jpgUri: URI, dimension: Dimension): MutableHttpResponse<ByteArray> {
+        val path = request.path
+        LOG.debug("Request for large $path")
+        return HttpResponse
+            .ok(imageHandler.createCachedImageVersion(path, jpgUri, dimension))
+            .header(CACHE_CONTROL, "public, immutable, max-age=$MAX_AGE")
+    }
+
+}

@@ -53,7 +53,7 @@ open class ImageHandler {
 
 
     @Cacheable(parameters = ["cachePath"])
-    open suspend fun createCachedImageVersion(cachePath: String, sourceUri: URI, imageVersion: Dimension): ByteArray {
+    open fun createCachedImageVersion(cachePath: String, sourceUri: URI, imageVersion: Dimension): ByteArray {
         LOG.info("Creating imageVersion with $cachePath")
         return createImageVersion(sourceUri, imageVersion)
     }
