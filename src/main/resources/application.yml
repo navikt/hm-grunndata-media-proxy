@@ -31,6 +31,9 @@ micronaut:
         step: PT1M
         descriptions: true
 endpoints:
+  caches:
+    enabled: true
+    sensitive: false
   metrics:
     enabled: true
   prometheus:
