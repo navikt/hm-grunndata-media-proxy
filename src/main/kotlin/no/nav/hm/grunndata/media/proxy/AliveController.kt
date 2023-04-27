@@ -1,4 +1,4 @@
-package no.nav.hm.grunndata.db.internal
+package no.nav.hm.grunndata.media.proxy
 
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
