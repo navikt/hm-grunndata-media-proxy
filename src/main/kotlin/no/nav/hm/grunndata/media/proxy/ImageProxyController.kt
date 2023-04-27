@@ -17,7 +17,8 @@ class ImageProxyController(private val imageHandler: ImageHandler,
 
     companion object {
         private val LOG = LoggerFactory.getLogger(ImageProxyController::class.java)
-        const val SMALL = 150
+        const val SMALL = 400
+        const val MEDIUM = 800
         const val LARGE = 1600
         const val MAX_AGE = "2592000"
     }
@@ -38,6 +39,18 @@ class ImageProxyController(private val imageHandler: ImageHandler,
 
     }
 
+    @Get(uri = "/${MEDIUM}w/{uri:.*}.jpg", produces = ["image/jpeg"])
+    fun resizeMediumJpgImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
+        val jpgUri = URI("$cdnUrl/$uri.jpg")
+        return createCachedImageVersion(request, jpgUri, Dimension(MEDIUM, MEDIUM))
+    }
+
+    @Get(uri = "/${MEDIUM}w/{uri:.*}.png", produces = ["image/png"])
+    fun resizeMediumPngImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
+        val pngUri = URI("$cdnUrl/$uri.png")
+        return createCachedImageVersion(request, pngUri, Dimension(MEDIUM, MEDIUM))
+
+    }
     @Get(uri = "/${LARGE}w/{uri:.*}.jpg", produces = ["image/jpeg"])
     fun resizeLargeJpgImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
         val jpgUri = URI("$cdnUrl/$uri.jpg")
