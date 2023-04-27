@@ -4,6 +4,8 @@ micronaut:
   caches:
     images:
       charset: 'UTF-8'
+      record-stats: true
+      expire-after-write: "3h"
   application:
     name: hm-grunndata-media-proxy
     thread-selection: auto
