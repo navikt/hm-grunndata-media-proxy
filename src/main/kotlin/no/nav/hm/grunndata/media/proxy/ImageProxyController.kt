@@ -25,26 +25,26 @@ class ImageProxyController(private val imageHandler: ImageHandler,
         LOG.info("using backend cdn url: $cdnUrl")
     }
 
-    @Get(uri = "/img/${SMALL}w/{uri:.*}.jpg", produces = ["image/jpeg"])
+    @Get(uri = "/${SMALL}w/{uri:.*}.jpg", produces = ["image/jpeg"])
     fun resizeSmallJpgImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
         val jpgUri = URI("$cdnUrl/$uri.jpg")
         return createCachedImageVersion(request, jpgUri, Dimension(SMALL, SMALL))
     }
 
-    @Get(uri = "/img/${SMALL}w/{uri:.*}.png", produces = ["image/png"])
+    @Get(uri = "/${SMALL}w/{uri:.*}.png", produces = ["image/png"])
     fun resizeSmallPngImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
         val pngUri = URI("$cdnUrl/$uri.png")
         return createCachedImageVersion(request, pngUri, Dimension(SMALL, SMALL))
 
     }
 
-    @Get(uri = "/img/${LARGE}w/{uri:.*}.jpg", produces = ["image/jpeg"])
+    @Get(uri = "/${LARGE}w/{uri:.*}.jpg", produces = ["image/jpeg"])
     fun resizeLargeJpgImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
         val jpgUri = URI("$cdnUrl/$uri.jpg")
         return createCachedImageVersion(request, jpgUri, Dimension(LARGE, LARGE))
     }
 
-    @Get(uri = "/img/${LARGE}w/{uri:.*}.png", produces = ["image/png"])
+    @Get(uri = "/${LARGE}w/{uri:.*}.png", produces = ["image/png"])
     fun resizeLargePngImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
         val pngUri = URI("$cdnUrl/$uri.png")
         return createCachedImageVersion(request, pngUri, Dimension(LARGE, LARGE))

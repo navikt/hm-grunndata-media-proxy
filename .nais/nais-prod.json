@@ -2,5 +2,5 @@
   "min_replicas": 2,
   "max_replicas": 2,
   "cdn_host": "cdn.nav.no",
-  "ingress": ["https://hm-imgproxy.nav.no"]
+  "ingress": ["https://finnhjelpemidler.nav.no/imageproxy"]
 }

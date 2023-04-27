@@ -9,10 +9,10 @@ spec:
   image: {{ image }}
   port: 8080
   liveness:
-    path: /internal/isAlive
+    path: /imageproxy/internal/isAlive
     initialDelay: 10
   readiness:
-    path: /internal/isReady
+    path: /imageproxy/internal/isReady
     initialDelay: 10
   replicas:
     min: {{ min_replicas }}
@@ -26,7 +26,7 @@ spec:
       memory: 128Mi
   prometheus:
     enabled: true
-    path: /internal/prometheus
+    path: /imageproxy/internal/prometheus
   env:
     - name: MEDIA_STORAGE_CDNURL
       value: "https://{{cdn_host}}/teamdigihot/grunndata/media/v1"
