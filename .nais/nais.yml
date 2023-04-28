@@ -30,6 +30,8 @@ spec:
   env:
     - name: MEDIA_STORAGE_CDNURL
       value: "https://{{cdn_host}}/teamdigihot/grunndata/media/v1"
+    - name: JAVA_OPTS
+      value: "-Xms256m -Xmx1024m"
   accessPolicy:
     outbound:
       external:
