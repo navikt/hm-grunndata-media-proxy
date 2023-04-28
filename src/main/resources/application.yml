@@ -5,7 +5,7 @@ micronaut:
   caches:
     images:
       charset: 'UTF-8'
-      expire-after-write: "3h"
+      expire-after-write: "2h"
       maximum-size: 10000
       record-stats: true
   application:
@@ -14,7 +14,7 @@ micronaut:
   netty:
     event-loops:
       default:
-        num-threads: 128
+        num-threads: 64
   metrics:
     enabled: true
     binders:
