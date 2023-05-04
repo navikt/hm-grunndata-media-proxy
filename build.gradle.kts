@@ -10,7 +10,7 @@ val logbackEncoderVersion = "7.3"
 val tcVersion = "1.17.6"
 val mockkVersion = "1.13.4"
 val kotestVersion = "5.5.5"
-
+val imageIOJpgPluginVersion = "3.9.4"
 
 group = "no.nav.hm"
 version = properties["version"] ?: "local-build"
@@ -48,6 +48,7 @@ dependencies {
     implementation("io.micronaut.micrometer:micronaut-micrometer-registry-prometheus")
     implementation("io.micronaut:micronaut-management")
     implementation("io.micronaut.cache:micronaut-cache-management")
+    implementation("com.twelvemonkeys.imageio:imageio-jpeg:$imageIOJpgPluginVersion")
 
     testImplementation("io.mockk:mockk:$mockkVersion")
     testImplementation("io.micronaut.test:micronaut-test-kotest5")
