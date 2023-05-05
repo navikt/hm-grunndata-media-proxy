@@ -11,6 +11,12 @@ metadata:
 spec:
   image: redis:7.0.11-alpine
   port: 6379
+  command:
+    - redis-server
+    - "/redis-conf/redis.conf"
+  filesFrom:
+    - configmap: hm-grunndata-media-redis-config
+      mountPath: /redis-conf
   replicas: # A single Redis-app doesn't scale
     min: 1
     max: 1 # More replicas doesn't sync
