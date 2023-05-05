@@ -2,12 +2,6 @@ micronaut:
   server:
     port: ${SERVER_PORT:8080}
     context-path: "/imageproxy"
-  caches:
-    images:
-      charset: 'UTF-8'
-      expire-after-write: "2h"
-      maximum-size: 10000
-      record-stats: true
   application:
     name: hm-grunndata-media-proxy
     thread-selection: auto
@@ -56,4 +50,8 @@ media:
   storage:
     cdnurl: ${MEDIA_STORAGE_CDNURL:`https://cdn.dev.nav.no/teamdigihot/grunndata/media/v1`}
 
-
+redis:
+  uri: redis://${REDIS_HOST:localhost}
+  caches:
+    images:
+      expire-after-write: 2h

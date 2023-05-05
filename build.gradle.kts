@@ -43,11 +43,14 @@ dependencies {
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
     implementation("io.micronaut:micronaut-http-server-netty")
     implementation("io.micronaut:micronaut-http-client")
-    implementation("io.micronaut.cache:micronaut-cache-caffeine")
+
     implementation("io.micronaut.micrometer:micronaut-micrometer-core")
     implementation("io.micronaut.micrometer:micronaut-micrometer-registry-prometheus")
     implementation("io.micronaut:micronaut-management")
+    //implementation("io.micronaut.cache:micronaut-cache-caffeine")
+    implementation("io.micronaut.redis:micronaut-redis-lettuce")
     implementation("io.micronaut.cache:micronaut-cache-management")
+
     implementation("com.twelvemonkeys.imageio:imageio-jpeg:$imageIOJpgPluginVersion")
 
     testImplementation("io.mockk:mockk:$mockkVersion")

@@ -6,8 +6,6 @@ on:
       - ".gitignore"
       - "LICENCE"
       - "CODEOWNERS"
-      - ".nais"
-      - ".github"
     branches:
       - main
 

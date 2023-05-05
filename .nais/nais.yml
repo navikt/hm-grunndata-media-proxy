@@ -32,8 +32,12 @@ spec:
       value: "https://{{cdn_host}}/teamdigihot/grunndata/media/v1"
     - name: JAVA_OPTS
       value: "{{java_opts}}"
+    - name: REDIS_HOST
+      value: hm-grunndata-media-redis
   accessPolicy:
     outbound:
+      rules:
+        - application: hm-grunndata-media-redis
       external:
         - host: "{{cdn_host}}"
   ingresses:
