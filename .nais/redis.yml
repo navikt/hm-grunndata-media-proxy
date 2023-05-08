@@ -33,3 +33,4 @@ spec:
     inbound:
       rules:
         - application: hm-grunndata-media-proxy
+        - application: hm-grunndata-redisexporter

@@ -3,7 +3,7 @@ kind: "Application"
 metadata:
   labels:
     team: teamdigihot
-  name: teamdigihot-redisexporter
+  name: hm-grunndata-redisexporter
   namespace: teamdigihot
 spec:
   image: oliver006/redis_exporter:v1.50.0
