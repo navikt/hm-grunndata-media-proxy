@@ -27,7 +27,7 @@ spec:
       rules:
         - application: hm-grunndata-media-redis
   env:
-    - name: REDIS_HOST
+    - name: REDIS_ADDR
       value: hm-grunndata-media-redis:6379
     - name: REDIS_EXPORTER_LOG_FORMAT
       value: json
