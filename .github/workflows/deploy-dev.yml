@@ -6,8 +6,7 @@ on:
       - ".gitignore"
       - "LICENCE"
       - "CODEOWNERS"
-      - ".nais/redis.yml"
-      - ".nais/redisconf.yml"
+      - ".nais/redis*"
     branches:
       - main
 
