@@ -3,9 +3,6 @@ package no.nav.hm.grunndata.media.proxy
 import io.micronaut.cache.annotation.CacheConfig
 import io.micronaut.cache.annotation.Cacheable
 import jakarta.inject.Singleton
-import org.apache.commons.imaging.ImageFormat
-import org.apache.commons.imaging.ImageFormats
-import org.apache.commons.imaging.Imaging
 import org.slf4j.LoggerFactory
 import java.awt.Dimension
 import java.awt.image.BufferedImage
@@ -43,7 +40,7 @@ open class ImageHandler {
 
     private fun resizeImage(imageUri: URI, boundary: Dimension): BufferedImage {
         imageUri.toURL().openStream().use {
-            val image = Imaging.getBufferedImage(it)
+            val image = ImageIO.read(it)
             return if (image.width > boundary.width || image.height > boundary.height)
                 resizeImage(image, boundary) else image
         }
@@ -61,7 +58,7 @@ open class ImageHandler {
         val bos = ByteArrayOutputStream()
         bos.use {
             val resized = resizeImage(sourceUri, imageVersion)
-            ImageIO.write(resized, format.defaultExtension, it)
+            ImageIO.write(resized, format.extension, it)
             resized.flush()
             return it.toByteArray()
         }
@@ -74,5 +71,9 @@ open class ImageHandler {
         return createImageVersion(sourceUri, format, imageVersion)
     }
 
+}
 
+enum class ImageFormat(val extension: String) {
+    JPG("jpg"),
+    PNG("png")
 }

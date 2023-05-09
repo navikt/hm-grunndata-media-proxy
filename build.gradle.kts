@@ -50,9 +50,7 @@ dependencies {
     implementation("io.micronaut:micronaut-management")
     implementation("io.micronaut.redis:micronaut-redis-lettuce")
     implementation("io.micronaut.cache:micronaut-cache-management")
-    implementation("org.apache.commons:commons-imaging:$imagingVersion")
-    //implementation("com.twelvemonkeys.imageio:imageio-jpeg:$imageIOJpgPluginVersion")
-
+    implementation("com.twelvemonkeys.imageio:imageio-jpeg:$imageIOJpgPluginVersion")
     testImplementation("io.mockk:mockk:$mockkVersion")
     testImplementation("io.micronaut.test:micronaut-test-kotest5")
     testImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
