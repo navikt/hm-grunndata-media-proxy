@@ -1,4 +1,4 @@
-FROM navikt/java:17
+FROM navikt/java:20
 USER root
 RUN apt-get update && apt-get install -y curl
 USER apprunner
