@@ -16,7 +16,7 @@ jobs:
     with:
       NAIS_RESOURCE: ".nais/nais.yml"
       NAIS_VARS: ".nais/nais-dev.json"
-      JAVA_VERSION: 20
+      JAVA_VERSION: 19
       SNYK_ENABLED: false
       SNYK_ORG: "hjelpemiddelbehov"
       TEAM: "teamdigihot"
