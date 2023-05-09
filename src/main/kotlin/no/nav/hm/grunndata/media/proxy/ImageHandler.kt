@@ -23,6 +23,7 @@ open class ImageHandler {
 
     init {
         val readers: Iterator<ImageReader> = ImageIO.getImageReadersByFormatName("JPEG")
+        ImageIO.setUseCache(false)
         while (readers.hasNext()) {
             LOG.info("reader: " + readers.next())
         }
