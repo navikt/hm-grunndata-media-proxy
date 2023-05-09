@@ -54,8 +54,10 @@ open class ImageHandler {
     private fun createImageVersion(sourceUri: URI, imageVersion: Dimension): ByteArray {
         val formatName = sourceUri.path.substringAfterLast(".").lowercase()
         val bos = ByteArrayOutputStream()
-        ImageIO.write(resizeImage(sourceUri, imageVersion), formatName, bos)
-        return bos.toByteArray()
+        bos.use {
+            ImageIO.write(resizeImage(sourceUri, imageVersion), formatName, bos)
+            return bos.toByteArray()
+        }
     }
 
 
