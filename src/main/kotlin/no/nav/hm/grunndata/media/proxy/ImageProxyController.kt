@@ -7,6 +7,8 @@ import io.micronaut.http.HttpResponse
 import io.micronaut.http.MutableHttpResponse
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
+import org.apache.commons.imaging.ImageFormat
+import org.apache.commons.imaging.ImageFormats
 import org.slf4j.LoggerFactory
 import java.awt.Dimension
 import java.net.URI
@@ -29,47 +31,47 @@ class ImageProxyController(private val imageHandler: ImageHandler,
     @Get(uri = "/${SMALL}d/{uri:.*}.jpg", produces = ["image/jpeg"])
     fun resizeSmallJpgImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
         val jpgUri = URI("$cdnUrl/$uri.jpg")
-        return createCachedImageVersion(request, jpgUri, Dimension(SMALL, SMALL))
+        return createCachedImageVersion(request, jpgUri, ImageFormats.JPEG, Dimension(SMALL, SMALL))
     }
 
     @Get(uri = "/${SMALL}d/{uri:.*}.png", produces = ["image/png"])
     fun resizeSmallPngImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
         val pngUri = URI("$cdnUrl/$uri.png")
-        return createCachedImageVersion(request, pngUri, Dimension(SMALL, SMALL))
+        return createCachedImageVersion(request, pngUri, ImageFormats.PNG, Dimension(SMALL, SMALL))
 
     }
 
     @Get(uri = "/${MEDIUM}d/{uri:.*}.jpg", produces = ["image/jpeg"])
     fun resizeMediumJpgImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
         val jpgUri = URI("$cdnUrl/$uri.jpg")
-        return createCachedImageVersion(request, jpgUri, Dimension(MEDIUM, MEDIUM))
+        return createCachedImageVersion(request, jpgUri, ImageFormats.JPEG, Dimension(MEDIUM, MEDIUM))
     }
 
     @Get(uri = "/${MEDIUM}d/{uri:.*}.png", produces = ["image/png"])
     fun resizeMediumPngImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
         val pngUri = URI("$cdnUrl/$uri.png")
-        return createCachedImageVersion(request, pngUri, Dimension(MEDIUM, MEDIUM))
+        return createCachedImageVersion(request, pngUri, ImageFormats.PNG, Dimension(MEDIUM, MEDIUM))
 
     }
     @Get(uri = "/${LARGE}d/{uri:.*}.jpg", produces = ["image/jpeg"])
     fun resizeLargeJpgImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
         val jpgUri = URI("$cdnUrl/$uri.jpg")
-        return createCachedImageVersion(request, jpgUri, Dimension(LARGE, LARGE))
+        return createCachedImageVersion(request, jpgUri, ImageFormats.JPEG, Dimension(LARGE, LARGE))
     }
 
     @Get(uri = "/${LARGE}d/{uri:.*}.png", produces = ["image/png"])
     fun resizeLargePngImage(uri: String, request: HttpRequest<*>): HttpResponse<ByteArray> {
         val pngUri = URI("$cdnUrl/$uri.png")
-        return createCachedImageVersion(request, pngUri, Dimension(LARGE, LARGE))
+        return createCachedImageVersion(request, pngUri, ImageFormats.PNG, Dimension(LARGE, LARGE))
 
     }
 
     private fun createCachedImageVersion(request: HttpRequest<*>,
-                                         jpgUri: URI, dimension: Dimension): MutableHttpResponse<ByteArray> {
+                                         jpgUri: URI, format: ImageFormat, dimension: Dimension): MutableHttpResponse<ByteArray> {
         val path = request.path
         LOG.debug("Request for large $path")
         return HttpResponse
-            .ok(imageHandler.createCachedImageVersion(path, jpgUri, dimension))
+            .ok(imageHandler.createCachedImageVersion(path, jpgUri, format, dimension))
             .header(CACHE_CONTROL, "public, immutable, max-age=$MAX_AGE")
     }
 
