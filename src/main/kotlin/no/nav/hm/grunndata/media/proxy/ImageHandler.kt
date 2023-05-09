@@ -55,8 +55,8 @@ open class ImageHandler {
         val formatName = sourceUri.path.substringAfterLast(".").lowercase()
         val bos = ByteArrayOutputStream()
         bos.use {
-            ImageIO.write(resizeImage(sourceUri, imageVersion), formatName, bos)
-            return bos.toByteArray()
+            ImageIO.write(resizeImage(sourceUri, imageVersion), formatName, it)
+            return it.toByteArray()
         }
     }
 
