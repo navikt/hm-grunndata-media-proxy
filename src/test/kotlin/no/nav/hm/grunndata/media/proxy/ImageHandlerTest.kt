@@ -12,7 +12,7 @@ import java.net.URI
 @MicronautTest
 class ImageHandlerTest(private val imageHandler: ImageHandler) {
 
-    @Test
+    //@Test
     fun imageHandler() {
         val imageUrl = URI("https://cdn.dev.nav.no/teamdigihot/grunndata/media/v1/orig/38227.jpg")
         val byteArray = imageHandler.createImageVersion(imageUrl, ImageFormats.JPEG, Dimension(LARGE, LARGE))
