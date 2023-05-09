@@ -34,6 +34,7 @@ open class ImageHandler {
         val graphics2D = resizedImage.createGraphics()
         graphics2D.drawImage(image, 0, 0, scaled.width, scaled.height, null)
         graphics2D.dispose()
+        image.flush()
         return resizedImage
     }
 
