@@ -7,9 +7,11 @@ import org.slf4j.LoggerFactory
 import java.awt.Dimension
 import java.awt.image.BufferedImage
 import java.io.ByteArrayOutputStream
+import java.io.InputStream
+import java.io.OutputStream
 import java.net.URI
-import javax.imageio.ImageIO
-import javax.imageio.ImageReader
+import javax.imageio.*
+import javax.imageio.stream.ImageOutputStream
 import kotlin.math.min
 
 
@@ -41,7 +43,7 @@ open class ImageHandler {
 
     private fun resizeImage(imageUri: URI, boundary: Dimension): BufferedImage {
         imageUri.toURL().openStream().use {
-            val image = ImageIO.read(it)
+            val image = readImage(it)
             return if (image.width > boundary.width || image.height > boundary.height)
                 resizeImage(image, boundary) else image
         }
@@ -56,10 +58,9 @@ open class ImageHandler {
 
 
     fun createImageVersion(sourceUri: URI, format: ImageFormat, imageVersion: Dimension): ByteArray {
-        val bos = ByteArrayOutputStream()
-        bos.use {
+        ByteArrayOutputStream().use {
             val resized = resizeImage(sourceUri, imageVersion)
-            ImageIO.write(resized, format.extension, it)
+            writeImage(resized, format.extension, it)
             resized.flush()
             return it.toByteArray()
         }
@@ -70,6 +71,35 @@ open class ImageHandler {
     open fun createCachedImageVersion(cachePath: String, sourceUri: URI, format: ImageFormat, imageVersion: Dimension): ByteArray {
         LOG.info("Creating imageVersion with $cachePath")
         return createImageVersion(sourceUri, format, imageVersion)
+    }
+
+    private fun readImage(input: InputStream): BufferedImage {
+        LOG.info("Reading image input stream witch cache setting: ${ImageIO.getUseCache()}")
+        ImageIO.createImageInputStream(input).use {
+            val readers = ImageIO.getImageReaders(it)
+            val reader = readers.next()
+            try {
+                reader.input = it
+                val param = reader.defaultReadParam
+                return reader.read(0, param)
+            }
+            finally {
+                reader.dispose()
+            }
+        }
+    }
+
+    private fun writeImage(image: BufferedImage, format: String, output: OutputStream) {
+        ImageIO.createImageOutputStream(output).use {
+            val writers = ImageIO.getImageWritersByFormatName(format)
+            val writer = writers.next()
+            try {
+                writer.output = it
+                writer.write(image)
+            } finally {
+                writer.dispose()
+            }
+        }
     }
 
 }
