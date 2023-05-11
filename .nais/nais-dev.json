@@ -3,5 +3,5 @@
   "max_replicas": 1,
   "cdn_host": "cdn.dev.nav.no",
   "ingress": ["https://hjelpemiddeloversikt.intern.dev.nav.no/imageproxy", "https://finnhjelpemidler.intern.dev.nav.no/imageproxy"],
-  "java_opts": "-Xms256m -Xmx512m -XX:+UseG1GC"
+  "java_opts": "-Xms128m -Xmx512m -XX:+UseG1GC"
 }
