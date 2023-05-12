@@ -34,6 +34,8 @@ spec:
       value: "{{java_opts}}"
     - name: REDIS_HOST
       value: "hm-grunndata-media-redis"
+    - name: LD_PRELOAD
+      value: "/usr/lib/x86_64-linux-gnu/libjemalloc.so"
   accessPolicy:
     outbound:
       rules:
