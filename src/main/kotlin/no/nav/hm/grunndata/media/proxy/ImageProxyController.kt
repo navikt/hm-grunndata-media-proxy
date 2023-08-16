@@ -22,6 +22,7 @@ class ImageProxyController(private val imageHandler: ImageHandler,
         const val LARGE = 1600
         const val MAX_AGE = "2592000"
     }
+
     init {
         LOG.info("using backend cdn url: $cdnUrl")
     }
@@ -69,7 +70,7 @@ class ImageProxyController(private val imageHandler: ImageHandler,
         val path = request.path
         LOG.debug("Request for large $path")
         return HttpResponse
-            .ok(imageHandler.createCachedImageVersion(path, jpgUri, format, dimension))
+            .ok(imageHandler.createCachedImageVersion(path, jpgUri, format, dimension).byteArray)
             .header(CACHE_CONTROL, "public, immutable, max-age=$MAX_AGE")
     }
 
