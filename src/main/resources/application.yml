@@ -62,12 +62,14 @@ microstream:
       imageversion:
         datasource-name: imageversion
         table-name: imageversion
+
   cache:
     images:
       key-type: java.lang.String
       value-type: no.nav.hm.grunndata.media.proxy.ImageVersion
       storage: imageversion
       statistics-enabled: true
+
 
 datasources:
   imageversion:
@@ -76,6 +78,8 @@ datasources:
     driverClassName: ${DB_DRIVER:org.testcontainers.jdbc.ContainerDatabaseDriver}
     username: ${DB_USERNAME:mediaproxy}
     password: ${DB_PASSWORD:mediaproxy}
+    maximum-pool-size: 8
+    minimum-idle: 0
 
 
 
