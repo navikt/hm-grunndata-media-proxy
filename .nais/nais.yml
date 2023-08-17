@@ -36,6 +36,20 @@ spec:
       value: "hm-grunndata-media-redis"
     - name: LD_PRELOAD
       value: "/usr/lib/x86_64-linux-gnu/libjemalloc.so"
+  gcp:
+    sqlInstances:
+      - name: hm-grunndata-media-proxy
+        type: POSTGRES_15
+        tier: {{ disk_tier }}
+        diskType: SSD
+        highAvailability: true
+        diskSize: {{ disk_size }}
+        diskAutoresize: true
+        autoBackupTime: "03:00"
+        databases:
+          - name: mediaproxy
+            envVarPrefix: DB
+        cascadingDelete: false
   accessPolicy:
     outbound:
       rules:

@@ -25,7 +25,6 @@ open class ImageHandler {
 
     init {
         val readers: Iterator<ImageReader> = ImageIO.getImageReadersByFormatName("JPEG")
-        ImageIO.setUseCache(false)
         while (readers.hasNext()) {
             LOG.info("reader: " + readers.next())
         }
@@ -57,24 +56,24 @@ open class ImageHandler {
     }
 
 
-    fun createImageVersion(sourceUri: URI, format: ImageFormat, imageVersion: Dimension): ByteArray {
+    fun createImageVersion(cachePath: String, sourceUri: URI, format: ImageFormat, imageVersion: Dimension): ImageVersion {
         ByteArrayOutputStream().use {
             val resized = resizeImage(sourceUri, imageVersion)
             writeImage(resized, format.extension, it)
             resized.flush()
-            return it.toByteArray()
+            return ImageVersion(cachePath, sourceUri, format, imageVersion, it.toByteArray())
         }
     }
 
 
     @Cacheable(parameters = ["cachePath"])
-    open fun createCachedImageVersion(cachePath: String, sourceUri: URI, format: ImageFormat, imageVersion: Dimension): ByteArray {
+    open fun createCachedImageVersion(cachePath: String, sourceUri: URI, format: ImageFormat, imageVersion: Dimension): ImageVersion {
         LOG.info("Creating imageVersion with $cachePath")
-        return createImageVersion(sourceUri, format, imageVersion)
+        return createImageVersion(cachePath, sourceUri, format, imageVersion)
     }
 
     private fun readImage(input: InputStream): BufferedImage {
-        LOG.info("Reading image input stream witch cache setting: ${ImageIO.getUseCache()}")
+        LOG.debug("Reading image input stream witch cache setting: ${ImageIO.getUseCache()}")
         ImageIO.createImageInputStream(input).use {
             val readers = ImageIO.getImageReaders(it)
             val reader = readers.next()

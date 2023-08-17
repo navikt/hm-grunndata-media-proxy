@@ -13,6 +13,8 @@ micronaut:
   metrics:
     enabled: true
     binders:
+      microstream:
+        enabled: false
       cache:
         enabled: true
       uptime:
@@ -25,11 +27,14 @@ micronaut:
         enabled: true
       logback:
         enabled: true
+      jdbc:
+        enabled: true
     export:
       prometheus:
         enabled: true
         step: PT1M
         descriptions: true
+
 endpoints:
   caches:
     enabled: true
@@ -51,8 +56,27 @@ media:
   storage:
     cdnurl: ${MEDIA_STORAGE_CDNURL:`https://cdn.dev.nav.no/teamdigihot/grunndata/media/v1`}
 
-redis:
-  uri: redis://${REDIS_HOST:localhost}
-  caches:
+microstream:
+  postgres:
+    storage:
+      imageversion:
+        datasource-name: imageversion
+        table-name: imageversion
+  cache:
     images:
-      expire-after-write: 48h
+      key-type: java.lang.String
+      value-type: no.nav.hm.grunndata.media.proxy.ImageVersion
+      storage: imageversion
+      statistics-enabled: true
+
+datasources:
+  imageversion:
+    db-type: postgresql
+    url: ${DB_JDBC_URL:`jdbc:tc:postgresql:15:///mediaproxy`}
+    driverClassName: ${DB_DRIVER:org.testcontainers.jdbc.ContainerDatabaseDriver}
+    username: ${DB_USERNAME:mediaproxy}
+    password: ${DB_PASSWORD:mediaproxy}
+
+
+
+

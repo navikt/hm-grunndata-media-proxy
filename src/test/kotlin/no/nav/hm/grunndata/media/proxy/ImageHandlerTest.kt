@@ -14,7 +14,7 @@ class ImageHandlerTest(private val imageHandler: ImageHandler) {
     //@Test
     fun imageHandler() {
         val imageUrl = URI("https://cdn.dev.nav.no/teamdigihot/grunndata/media/v1/orig/38227.jpg")
-        val byteArray = imageHandler.createImageVersion(imageUrl, ImageFormat.JPG, Dimension(LARGE, LARGE))
+        val byteArray = imageHandler.createImageVersion(cachePath = "cachepath", imageUrl, ImageFormat.JPG, Dimension(LARGE, LARGE)).byteArray
         val file = File("test.jpg").writeBytes(byteArray)
         file.shouldNotBeNull()
     }

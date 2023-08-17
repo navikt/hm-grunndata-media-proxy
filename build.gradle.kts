@@ -12,6 +12,8 @@ val mockkVersion = "1.13.4"
 val kotestVersion = "5.5.5"
 val imageIOJpgPluginVersion = "3.9.4"
 val imagingVersion = "1.0-alpha3"
+val postgresqlVersion= "42.5.4"
+
 
 group = "no.nav.hm"
 version = properties["version"] ?: "local-build"
@@ -34,8 +36,10 @@ dependencies {
 
     api("ch.qos.logback:logback-classic:$logbackClassicVersion")
     api("net.logstash.logback:logstash-logback-encoder:$logbackEncoderVersion")
-
-    runtimeOnly("org.yaml:snakeyaml")
+    kapt("io.micronaut:micronaut-inject")
+    implementation("io.micronaut:micronaut-inject")
+    implementation("org.yaml:snakeyaml")
+    //implementation("io.micronaut.toml:micronaut-toml")
     implementation("io.micronaut:micronaut-jackson-databind")
     // coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
@@ -51,14 +55,24 @@ dependencies {
     implementation("io.micronaut.micrometer:micronaut-micrometer-core")
     implementation("io.micronaut.micrometer:micronaut-micrometer-registry-prometheus")
     implementation("io.micronaut:micronaut-management")
-    implementation("io.micronaut.redis:micronaut-redis-lettuce")
     implementation("io.micronaut.cache:micronaut-cache-management")
+
+
     implementation("com.twelvemonkeys.imageio:imageio-jpeg:$imageIOJpgPluginVersion")
     testImplementation("io.mockk:mockk:$mockkVersion")
     testImplementation("io.micronaut.test:micronaut-test-kotest5")
     testImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
     testImplementation("io.kotest:kotest-assertions-core-jvm:$kotestVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion")
+
+    runtimeOnly("io.micronaut.sql:micronaut-jdbc-hikari")
+    runtimeOnly("org.postgresql:postgresql")
+
+    runtimeOnly("one.microstream:microstream-afs-sql")
+    implementation("io.micronaut.microstream:micronaut-microstream-cache")
+    kapt("io.micronaut.microstream:micronaut-microstream-annotations")
+    implementation("io.micronaut.microstream:micronaut-microstream-annotations")
+    implementation("io.micronaut.microstream:micronaut-microstream")
 }
 
 micronaut {
@@ -103,7 +117,7 @@ tasks.withType<Test> {
 }
 
 tasks.withType<Wrapper> {
-    gradleVersion = "8.0.1"
+    gradleVersion = "8.2.1"
 }
 
 repositories {
