@@ -55,4 +55,4 @@ redis:
   uri: redis://${REDIS_HOST:localhost}
   caches:
     images:
-      expire-after-write: 48h
+      expire-after-write: 7d
