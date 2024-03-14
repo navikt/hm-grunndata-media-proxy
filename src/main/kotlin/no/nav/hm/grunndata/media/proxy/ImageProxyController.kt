@@ -67,7 +67,7 @@ class ImageProxyController(private val imageHandler: ImageHandler,
     private fun createCachedImageVersion(request: HttpRequest<*>,
                                          jpgUri: URI, format: ImageFormat, dimension: Dimension): MutableHttpResponse<ByteArray> {
         val path = request.path
-        LOG.debug("Request for large $path")
+        LOG.debug("Request for $path")
         return HttpResponse
             .ok(imageHandler.createCachedImageVersion(path, jpgUri, format, dimension))
             .header(CACHE_CONTROL, "public, immutable, max-age=$MAX_AGE")

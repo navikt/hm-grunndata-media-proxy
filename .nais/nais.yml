@@ -40,6 +40,7 @@ spec:
     outbound:
       rules:
         - application: hm-grunndata-media-redis
+        - application: hm-grunndata-media
       external:
         - host: "{{cdn_host}}"
   ingresses:

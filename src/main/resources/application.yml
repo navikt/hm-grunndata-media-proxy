@@ -56,3 +56,5 @@ redis:
   caches:
     images:
       expire-after-write: 7d
+    files:
+      expire-after-write: 1d
