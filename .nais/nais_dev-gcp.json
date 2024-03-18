@@ -4,5 +4,5 @@
   "cdn_host": "cdn.dev.nav.no",
   "media_storage_cdnurl": "http://hm-grunndata-media/internal/media/file",
   "ingress": ["https://finnhjelpemiddel.intern.dev.nav.no/imageproxy", "https://finnhjelpemiddel.ekstern.dev.nav.no/imageproxy"],
-  "java_opts": "-Xms128m -Xmx512m -XX:+UseG1GC"
+  "java_opts": "-Xms128m -Xmx1024m -XX:+UseG1GC"
 }
