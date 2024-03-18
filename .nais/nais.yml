@@ -29,7 +29,7 @@ spec:
     path: /imageproxy/internal/prometheus
   env:
     - name: MEDIA_STORAGE_CDNURL
-      value: "https://{{cdn_host}}/teamdigihot/grunndata/media/v1"
+      value: "{{ media_storage_cdnurl }}"
     - name: JAVA_OPTS
       value: "{{java_opts}}"
     - name: REDIS_HOST
