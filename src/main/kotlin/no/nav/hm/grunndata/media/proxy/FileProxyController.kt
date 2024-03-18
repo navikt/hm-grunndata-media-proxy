@@ -8,7 +8,7 @@ import io.micronaut.http.annotation.Get
 import java.net.URI
 
 
-@Controller("/files")
+@Controller("/file")
 class FileProxyController(private val fileHandler: FileHandler,
                           @Value("\${media.storage.cdnurl}") val cdnUrl: String) {
 
