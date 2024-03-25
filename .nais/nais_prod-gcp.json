@@ -2,7 +2,7 @@
   "min_replicas": 2,
   "max_replicas": 2,
   "cdn_host": "cdn.nav.no",
-  "media_storage_cdnurl": "https://cdn.nav.no/teamdigihot/grunndata/media/v1",
+  "media_storage_cdnurl": "http://hm-grunndata-media/internal/media/file",
   "ingress": ["https://finnhjelpemidler.nav.no/imageproxy", "https://finnhjelpemiddel.nav.no/imageproxy"],
   "java_opts": "-Xms256m -Xmx3096m -XX:+UseG1GC"
 }
