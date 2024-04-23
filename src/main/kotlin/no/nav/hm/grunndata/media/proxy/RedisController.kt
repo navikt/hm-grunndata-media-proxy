@@ -16,11 +16,11 @@ class RedisController(private val redisClient: RedisClient) {
         private val LOG = LoggerFactory.getLogger(RedisController::class.java)
     }
 
-    @Get("/flush{?id}")
-    fun flush(@QueryValue id: String) {
-        val keyS = "images:/imageproxy/${SMALL}d/$id"
-        val keyM = "images:/imageproxy/${MEDIUM}d/$id"
-        val keyL = "images:/imageproxy/${LARGE}d/$id"
+    @Get("/flush{?uri}")
+    fun flush(@QueryValue uri: String) {
+        val keyS = "images:/imageproxy/${SMALL}d/$uri"
+        val keyM = "images:/imageproxy/${MEDIUM}d/$uri"
+        val keyL = "images:/imageproxy/${LARGE}d/$uri"
         LOG.info("Deleting keys $keyS, $keyM, $keyL")
         val commands = redisClient.connect().sync()
         commands.del(keyS)
