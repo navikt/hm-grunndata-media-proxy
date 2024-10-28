@@ -1,4 +1,4 @@
-FROM navikt/java:17
+FROM ghcr.io/navikt/baseimages/temurin:17
 USER root
 RUN apt-get update
 RUN apt-get install -y libjemalloc-dev
