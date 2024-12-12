@@ -16,5 +16,3 @@ jobs:
         env:
           CLUSTER: dev-gcp
           RESOURCE: .nais/redis/redis-dev.yml
-          VARS: .nais/dev.yml
-
