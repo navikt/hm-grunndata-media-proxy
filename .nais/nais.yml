@@ -44,6 +44,6 @@ spec:
   {{#each ingress as |url|}}
      - {{url}}
   {{/each}}
-redis:
-  - instance: hm-grunndata-media
-    access: readwrite
+  redis:
+    - instance: hm-grunndata-media
+      access: readwrite
