@@ -58,6 +58,4 @@ redis:
       expire-after-write: 1d
     files:
       expire-after-write: 1d
-  password: ${REDIS_PASSWORD_HM_GRUNNDATA_MEDIA}
-  username: ${REDIS_USERNAME_HM_GRUNNDATA_MEDIA}
 
