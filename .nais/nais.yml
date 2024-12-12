@@ -32,14 +32,11 @@ spec:
       value: "{{ media_storage_cdnurl }}"
     - name: JAVA_OPTS
       value: "{{java_opts}}"
-    - name: REDIS_HOST
-      value: "hm-grunndata-media-redis"
     - name: LD_PRELOAD
       value: "/usr/lib/x86_64-linux-gnu/libjemalloc.so"
   accessPolicy:
     outbound:
       rules:
-        - application: hm-grunndata-media-redis
         - application: hm-grunndata-media
       external:
         - host: "{{cdn_host}}"
@@ -47,3 +44,6 @@ spec:
   {{#each ingress as |url|}}
      - {{url}}
   {{/each}}
+redis:
+  - instance: hm-grunndata-media
+    access: readwrite
