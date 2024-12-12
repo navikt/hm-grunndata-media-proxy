@@ -52,9 +52,12 @@ media:
     cdnurl: ${MEDIA_STORAGE_CDNURL:`https://cdn.dev.nav.no/teamdigihot/grunndata/media/v1`}
 
 redis:
-  uri: redis://${REDIS_HOST:localhost}
+  uri: ${REDIS_URI_hm-grunndata-media}
   caches:
     images:
       expire-after-write: 1d
     files:
       expire-after-write: 1d
+  password: ${REDIS_PASSWORD_hm-grunndata-media}
+  username: ${REDIS_USERNAME_hm-grunndata-media}
+
