@@ -7,7 +7,7 @@ metadata:
   name: redis-teamdigihot-hm-grunndata-media
   namespace: teamdigihot
 spec:
-  plan: startup-8
+  plan: startup-12
   project: nav-prod
 ---
 apiVersion: aiven.io/v1alpha1
