@@ -9,7 +9,6 @@ on:
       - ".nais/redis*"
       - ".github/workflows/deploy-rollback.yml"
       - ".github/workflows/deploy-prod.yml"
-      - ".github/workflows/deploy-dev.yml"
     branches:
       - main
 
