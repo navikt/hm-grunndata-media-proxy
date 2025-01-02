@@ -11,7 +11,7 @@ on:
       - ".github/workflows/deploy-prod.yml"
       - ".github/workflows/deploy-dev.yml"
     branches:
-      - aivenRedis
+      - main
 
 jobs:
   call-workflow:
