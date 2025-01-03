@@ -15,5 +15,10 @@ jobs:
         uses: nais/deploy/actions/deploy@v2
         env:
           CLUSTER: dev-gcp
-          RESOURCE: .nais/redis/redis-dev.yml, .nais/redis/redis-dev-si.yml
+          RESOURCE: .nais/redis/redis-dev.yml
+      - name: Deploy Redis SI
+        uses: nais/deploy/actions/deploy@v2
+        env:
+          CLUSTER: dev-gcp
+          RESOURCE: .nais/redis/redis-dev-si.yml
 
