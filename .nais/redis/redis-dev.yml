@@ -10,7 +10,7 @@ spec:
   plan: startup-8
   project: nav-dev
   userConfig:
-    redis_maxmemory_policy: "volatile-lru"
+    redis_maxmemory_policy: "allkeys-lru"
 ---
 apiVersion: aiven.io/v1alpha1
 kind: ServiceIntegration
