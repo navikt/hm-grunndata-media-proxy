@@ -9,3 +9,5 @@ metadata:
 spec:
   plan: startup-8
   project: nav-prod
+  userConfig:
+    redis_maxmemory_policy: "volatile-lru"
