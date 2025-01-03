@@ -2,9 +2,9 @@ apiVersion: aiven.io/v1alpha1
 kind: Redis
 metadata:
   labels:
-    app: hm-grunndata-media-redis-v3
+    app: hm-grunndata-media-redis-v4
     team: teamdigihot
-  name: redis-teamdigihot-hm-grunndata-media-v3
+  name: redis-teamdigihot-hm-grunndata-media-v4
   namespace: teamdigihot
 spec:
   plan: startup-8
