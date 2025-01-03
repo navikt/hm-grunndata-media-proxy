@@ -17,6 +17,7 @@ jobs:
           CLUSTER: dev-gcp
           RESOURCE: .nais/redis/redis-dev.yml
   deploy-redis-si:
+    needs: deploy-redis
     name: Deploy redis serviceIntegration
     runs-on: ubuntu-latest
     permissions:

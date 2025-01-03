@@ -9,16 +9,3 @@ metadata:
 spec:
   plan: startup-8
   project: nav-prod
----
-apiVersion: aiven.io/v1alpha1
-kind: ServiceIntegration
-metadata:
-  labels:
-    team: teamdigihot
-  name: redis-teamdigihot-hm-grunndata-media
-  namespace: teamdigihot
-spec:
-  project: nav-prod
-  integrationType: prometheus
-  destinationEndpointId: 76685598-1048-4f56-b34a-9769ef747a92
-  sourceServiceName: redis-teamdigihot-hm-grunndata-media
