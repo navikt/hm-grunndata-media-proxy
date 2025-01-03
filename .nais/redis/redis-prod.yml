@@ -2,12 +2,25 @@ apiVersion: aiven.io/v1alpha1
 kind: Redis
 metadata:
   labels:
-    app: hm-grunndata-media-redis-v2
+    app: hm-grunndata-media-proxy
     team: teamdigihot
-  name: redis-teamdigihot-hm-grunndata-media
+  name: redis-teamdigihot-hm-grunndata-media-v2
   namespace: teamdigihot
 spec:
   plan: startup-8
   project: nav-prod
   userConfig:
     redis_maxmemory_policy: "volatile-lru"
+---
+apiVersion: aiven.io/v1alpha1
+kind: ServiceIntegration
+metadata:
+  labels:
+    team: teamdigihot
+  name: redis-teamdigihot-hm-grunndata-media-v2
+  namespace: teamdigihot
+spec:
+  project: nav-prod
+  integrationType: prometheus
+  destinationEndpointId: 76685598-1048-4f56-b34a-9769ef747a92
+  sourceServiceName: redis-teamdigihot-hm-grunndata-media-v2
