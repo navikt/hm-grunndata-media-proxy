@@ -1,4 +1,4 @@
-name: "Redis v2: deploy to dev-gcp"
+name: "Redis v3: deploy to dev-gcp"
 
 on: workflow_dispatch
 
