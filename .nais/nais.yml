@@ -45,5 +45,5 @@ spec:
      - {{url}}
   {{/each}}
   redis:
-    - instance: hm-grunndata-media
+    - instance: hm-grunndata-media-v3
       access: readwrite
