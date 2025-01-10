@@ -10,7 +10,7 @@ on:
       - ".github/workflows/deploy-rollback.yml"
       - ".github/workflows/deploy-prod.yml"
     branches:
-      - main_
+      - main
 
 jobs:
   call-workflow:
