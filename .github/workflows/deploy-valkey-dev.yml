@@ -1,0 +1,19 @@
+name: "Valkey v1: deploy to dev-gcp"
+
+on: workflow_dispatch
+
+jobs:
+  deploy-valkey:
+    name: Deploy Valkey
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: "write"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Deploy Valkey
+        uses: nais/deploy/actions/deploy@v2
+        env:
+          CLUSTER: dev-gcp
+          RESOURCE: .nais/valkey/valkey-dev.yml
+
