@@ -45,5 +45,5 @@ spec:
      - {{url}}
   {{/each}}
   valkey:
-    - instance: hm-grunndata-media-v2
+    - instance: hm-grunndata-media-v1
       access: readwrite
