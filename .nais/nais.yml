@@ -44,6 +44,6 @@ spec:
   {{#each ingress as |url|}}
      - {{url}}
   {{/each}}
-  redis:
+  valkey:
     - instance: hm-grunndata-media-v2
       access: readwrite
