@@ -77,7 +77,6 @@ open class ImageHandler {
     }
 
     private fun readImage(input: InputStream): BufferedImageMetaData {
-        LOG.info("Reading image input stream witch cache setting: ${ImageIO.getUseCache()}")
         ImageIO.createImageInputStream(input).use {
             val readers = ImageIO.getImageReaders(it)
             val reader = readers.next()
