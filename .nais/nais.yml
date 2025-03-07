@@ -34,6 +34,8 @@ spec:
       value: "{{java_opts}}"
     - name: LD_PRELOAD
       value: "/usr/lib/x86_64-linux-gnu/libjemalloc.so"
+    - name: REDIS_URI
+      value: "rediss://${REDIS_USERNAME_HM_GRUNNDATA_MEDIA_V1}:${REDIS_PASSWORD_HM_GRUNNDATA_MEDIA_V1}@${REDIS_HOST_HM_GRUNNDATA_MEDIA_V1}:${REDIS_PORT_HM_GRUNNDATA_MEDIA_V1}"
   accessPolicy:
     outbound:
       rules:
