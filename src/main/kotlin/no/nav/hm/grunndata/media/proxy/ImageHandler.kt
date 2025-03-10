@@ -3,8 +3,8 @@ package no.nav.hm.grunndata.media.proxy
 import io.micronaut.cache.annotation.CacheConfig
 import io.micronaut.cache.annotation.Cacheable
 import jakarta.inject.Singleton
-import org.slf4j.LoggerFactory
 import java.awt.Dimension
+import java.awt.color.ColorSpace
 import java.awt.image.BufferedImage
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
@@ -13,6 +13,7 @@ import java.net.URI
 import javax.imageio.*
 import javax.imageio.metadata.IIOMetadata
 import kotlin.math.min
+import org.slf4j.LoggerFactory
 
 
 @Singleton
@@ -39,7 +40,7 @@ open class ImageHandler {
         graphics2D.drawImage(image, 0, 0, scaled.width, scaled.height, null)
         graphics2D.dispose()
         image.flush()
-        return BufferedImageMetaData(resizedImage, imageMeta.metadata)
+        return BufferedImageMetaData(resizedImage, imageMeta.metadata, imageMeta.cmyk)
     }
 
     private fun resizeImage(imageUri: URI, boundary: Dimension): BufferedImageMetaData {
@@ -63,7 +64,7 @@ open class ImageHandler {
         ByteArrayOutputStream().use {
             val bufferedImageMetaData = resizeImage(sourceUri, imageVersion)
             val image = bufferedImageMetaData.bufferedImage
-            writeImage(image, format.extension, it, bufferedImageMetaData.metadata)
+            writeImage(bufferedImageMetaData, format.extension, it)
             image.flush()
             return it.toByteArray()
         }
@@ -84,7 +85,14 @@ open class ImageHandler {
                 reader.input = it
                 val metadata = reader.getImageMetadata(0)
                 val param = reader.defaultReadParam
-                return BufferedImageMetaData(reader.read(0, param), metadata)
+                val image = reader.read(0, param)
+                var cmyk: Boolean = false
+                for (type in reader.getImageTypes(0)) {
+                    if (type.colorModel.colorSpace.type == ColorSpace.TYPE_CMYK) {
+                        cmyk = true
+                    }
+                }
+                return BufferedImageMetaData(image, metadata, cmyk)
             }
             finally {
                 reader.dispose()
@@ -92,13 +100,16 @@ open class ImageHandler {
         }
     }
 
-    private fun writeImage(image: BufferedImage, format: String, output: OutputStream, metadata: IIOMetadata) {
+    private fun writeImage(bufferedImageMetaData: BufferedImageMetaData, format: String, output: OutputStream) {
         ImageIO.createImageOutputStream(output).use {
             val writers = ImageIO.getImageWritersByFormatName(format)
             val writer = writers.next()
             try {
                 writer.output = it
-                writer.write(IIOImage(image, null, metadata))
+                val image = bufferedImageMetaData.bufferedImage
+                if (bufferedImageMetaData.cmyk)
+                    writer.write(image)
+                else writer.write(IIOImage(image, null, bufferedImageMetaData.metadata))
             } finally {
                 writer.dispose()
             }
@@ -106,7 +117,7 @@ open class ImageHandler {
     }
 
 }
-data class BufferedImageMetaData(val bufferedImage: BufferedImage, val metadata: IIOMetadata)
+data class BufferedImageMetaData(val bufferedImage: BufferedImage, val metadata: IIOMetadata, val cmyk: Boolean)
 
 enum class ImageFormat(val extension: String) {
     JPG("jpg"),
