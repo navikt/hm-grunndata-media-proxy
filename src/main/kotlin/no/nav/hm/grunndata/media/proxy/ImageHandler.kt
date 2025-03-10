@@ -107,9 +107,7 @@ open class ImageHandler {
             try {
                 writer.output = it
                 val image = bufferedImageMetaData.bufferedImage
-                if (bufferedImageMetaData.cmyk)
-                    writer.write(image)
-                else writer.write(IIOImage(image, null, bufferedImageMetaData.metadata))
+                writer.write(image)
             } finally {
                 writer.dispose()
             }
