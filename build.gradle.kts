@@ -2,16 +2,13 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val jvmTarget = "17"
-val micronautVersion = "4.7.6"
-val micrometerRegistryPrometheusVersion = "1.9.1"
+val micronautVersion = "4.9.1"
 val junitJupiterVersion = "5.9.2"
 val logbackClassicVersion = "1.4.14"
 val logbackEncoderVersion = "7.3"
-val tcVersion = "1.17.6"
 val mockkVersion = "1.13.4"
 val kotestVersion = "5.5.5"
 val imageIOJpgPluginVersion = "3.9.4"
-val imagingVersion = "1.0-alpha3"
 
 group = "no.nav.hm"
 version = properties["version"] ?: "local-build"
@@ -21,7 +18,7 @@ plugins {
     kotlin("kapt") version "1.9.25"
     id("java")
     id("com.github.johnrengelman.shadow") version "7.1.0"
-    id("io.micronaut.application") version "4.4.5"
+    id("io.micronaut.application") version "4.5.4"
 }
 
 configurations.all {
@@ -32,7 +29,7 @@ configurations.all {
 
 dependencies {
 
-    api("ch.qos.logback:logback-classic:$logbackClassicVersion")
+    api("ch.qos.logback:logback-classic")
     api("net.logstash.logback:logstash-logback-encoder:$logbackEncoderVersion")
 
     runtimeOnly("org.yaml:snakeyaml")
@@ -55,8 +52,6 @@ dependencies {
     implementation("io.micronaut.cache:micronaut-cache-management")
     implementation("com.twelvemonkeys.imageio:imageio-jpeg:$imageIOJpgPluginVersion")
     testImplementation("io.mockk:mockk:$mockkVersion")
-    testImplementation("io.micronaut.test:micronaut-test-kotest5")
-    testImplementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
     testImplementation("io.kotest:kotest-assertions-core-jvm:$kotestVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion")
 }
