@@ -1,6 +1,6 @@
 {
-  "min_replicas": 3,
-  "max_replicas": 3,
+  "min_replicas": 2,
+  "max_replicas": 4,
   "cdn_host": "cdn.nav.no",
   "media_storage_cdnurl": "http://hm-grunndata-media/internal/media/file",
   "ingress": ["https://finnhjelpemidler.nav.no/imageproxy", "https://finnhjelpemiddel.nav.no/imageproxy"],
