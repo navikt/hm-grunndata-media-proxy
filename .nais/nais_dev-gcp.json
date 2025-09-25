@@ -3,6 +3,6 @@
   "max_replicas": 1,
   "cdn_host": "cdn.dev.nav.no",
   "media_storage_cdnurl": "http://hm-grunndata-media/internal/media/file",
-  "ingress": ["https://finnhjelpemiddel.intern.dev.nav.no/imageproxy", "https://finnhjelpemiddel.ansatt.dev.nav.no/imageproxy"],
+  "ingress": ["https://finnhjelpemiddel.intern.dev.nav.no/imageproxy", "https://finnhjelpemiddel.ansatt.dev.nav.no/imageproxy", "https://finnhjelpemiddel.ekstern.dev.nav.no/imageproxy"],
   "java_opts": "-Xms128m -Xmx1024m -XX:+UseG1GC"
 }
