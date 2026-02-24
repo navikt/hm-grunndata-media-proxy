@@ -1,10 +1,8 @@
-FROM debian:trixie-slim
+FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
-RUN apt-get update && apt-get install -y openjdk-21-jdk libjemalloc-dev
+RUN apk add --no-cache jemalloc-dev
 ENV TZ="Europe/Oslo"
 EXPOSE 8080
-ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-ENV PATH="$JAVA_HOME/bin:$PATH"
 COPY build/libs/hm-grunndata-media-proxy-all.jar ./app.jar
 USER 1000
 CMD ["java", "-jar", "app.jar"]
