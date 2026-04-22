@@ -1,8 +1,9 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val jvmTarget = "17"
-val micronautVersion = "4.10.9"
+val micronautVersion = "4.10.12"
 val junitJupiterVersion = "5.9.2"
 val logbackClassicVersion = "1.5.25"
 val logbackEncoderVersion = "8.1"
@@ -14,11 +15,12 @@ group = "no.nav.hm"
 version = properties["version"] ?: "local-build"
 
 plugins {
-    kotlin("jvm") version "1.9.25"
-    kotlin("kapt") version "1.9.25"
+    id("org.jetbrains.kotlin.jvm") version "2.1.21"
+    id("org.jetbrains.kotlin.plugin.allopen") version "2.1.21"
     id("java")
-    id("com.github.johnrengelman.shadow") version "7.1.0"
+    id("com.gradleup.shadow") version "9.3.1"
     id("io.micronaut.application") version "4.6.2"
+    id("com.google.devtools.ksp") version "2.1.21-2.0.1"
 }
 
 configurations.all {
@@ -76,13 +78,11 @@ java {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = jvmTarget
-    kapt.includeCompileClasspath = false
+    compilerOptions.jvmTarget.set(JvmTarget.fromTarget(jvmTarget))
 }
 
 tasks.named<KotlinCompile>("compileTestKotlin") {
-    kotlinOptions.jvmTarget = jvmTarget
-    kapt.includeCompileClasspath = false
+    compilerOptions.jvmTarget.set(JvmTarget.fromTarget(jvmTarget))
 }
 
 tasks.withType<Test> {
@@ -98,7 +98,7 @@ tasks.withType<Test> {
 }
 
 tasks.withType<Wrapper> {
-    gradleVersion = "8.5"
+    gradleVersion = "8.11"
 }
 
 repositories {
