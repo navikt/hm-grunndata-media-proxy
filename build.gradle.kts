@@ -2,7 +2,7 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val jvmTarget = "17"
+val jvmTarget = "25"
 val micronautVersion = "4.10.12"
 val junitJupiterVersion = "5.9.2"
 val logbackClassicVersion = "1.5.25"
@@ -11,17 +11,17 @@ val mockkVersion = "1.13.4"
 val kotestVersion = "5.5.5"
 val imageIOJpgPluginVersion = "3.9.4"
 
-group = "no.nav.hm"
-version = properties["version"] ?: "local-build"
-
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "2.1.21"
-    id("org.jetbrains.kotlin.plugin.allopen") version "2.1.21"
+    id("org.jetbrains.kotlin.jvm") version "2.3.21"
+    id("org.jetbrains.kotlin.plugin.allopen") version "2.3.21"
     id("java")
     id("com.gradleup.shadow") version "9.3.1"
     id("io.micronaut.application") version "4.6.2"
-    id("com.google.devtools.ksp") version "2.1.21-2.0.1"
+    id("com.google.devtools.ksp") version "2.3.0"
 }
+
+group = "no.nav.hm"
+version = properties["version"] ?: "local-build"
 
 configurations.all {
     resolutionStrategy {
@@ -95,10 +95,6 @@ tasks.withType<Test> {
         exceptionFormat = TestExceptionFormat.FULL
         showStandardStreams = true
     }
-}
-
-tasks.withType<Wrapper> {
-    gradleVersion = "8.11"
 }
 
 repositories {
