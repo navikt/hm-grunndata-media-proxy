@@ -6,7 +6,7 @@ val jvmTarget = "25"
 val micronautVersion = "4.10.12"
 val junitJupiterVersion = "5.9.2"
 val logbackClassicVersion = "1.5.25"
-val logbackEncoderVersion = "8.1"
+val logbackEncoderVersion = "9.0"
 val mockkVersion = "1.13.4"
 val kotestVersion = "5.5.5"
 val imageIOJpgPluginVersion = "3.9.4"
@@ -16,8 +16,8 @@ plugins {
     id("org.jetbrains.kotlin.plugin.allopen") version "2.3.21"
     id("java")
     id("com.gradleup.shadow") version "9.3.1"
-    id("io.micronaut.application") version "4.6.2"
-    id("com.google.devtools.ksp") version "2.3.0"
+    id("io.micronaut.application") version "5.0.0"
+    id("com.google.devtools.ksp") version "2.3.7"
 }
 
 group = "no.nav.hm"
@@ -36,6 +36,7 @@ dependencies {
 
     runtimeOnly("org.yaml:snakeyaml")
     implementation("io.micronaut:micronaut-jackson-databind")
+
     // coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive")
