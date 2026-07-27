@@ -17,7 +17,6 @@ plugins {
 }
 
 group = "no.nav.hm"
-version = properties["version"] ?: "local-build"
 
 configurations.all {
     resolutionStrategy {
