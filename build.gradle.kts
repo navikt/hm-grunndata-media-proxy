@@ -4,7 +4,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val jvmTarget = "25"
 val micronautVersion = "5.0.6"
-val logbackClassicVersion = "1.5.25"
 val logbackEncoderVersion = "9.0"
 val mockkVersion = "1.13.4"
 val kotestVersion = "5.5.5"
