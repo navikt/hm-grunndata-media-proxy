@@ -30,7 +30,10 @@ configurations.all {
 }
 
 dependencies {
-
+    constraints {
+        implementation("org.codehaus.plexus:plexus-utils:4.0.3")
+    }
+    
     api("ch.qos.logback:logback-classic")
     api("net.logstash.logback:logstash-logback-encoder:$logbackEncoderVersion")
 
