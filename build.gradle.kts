@@ -13,7 +13,7 @@ plugins {
     id("java")
     id("com.gradleup.shadow") version "9.6.1"
     id("io.micronaut.application") version "5.0.2"
-    id("com.google.devtools.ksp") version "2.3.7"
+    id("com.google.devtools.ksp") version "2.3.10"
 }
 
 group = "no.nav.hm"
