@@ -5,8 +5,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val jvmTarget = "25"
 val micronautVersion = "5.0.6"
 val logbackEncoderVersion = "9.0"
-val mockkVersion = "1.13.4"
-val kotestVersion = "5.5.5"
 val imageIOJpgPluginVersion = "3.9.4"
 
 plugins {
@@ -55,8 +53,8 @@ dependencies {
     implementation("io.micronaut.redis:micronaut-redis-lettuce")
     implementation("io.micronaut.cache:micronaut-cache-management")
     implementation("com.twelvemonkeys.imageio:imageio-jpeg:$imageIOJpgPluginVersion")
-    testImplementation("io.mockk:mockk:$mockkVersion")
-    testImplementation("io.kotest:kotest-assertions-core-jvm:$kotestVersion")
+    testImplementation("io.mockk:mockk")
+    testImplementation("io.kotest:kotest-assertions-core-jvm")
     testImplementation("org.junit.jupiter:junit-jupiter-params")
 }
 
