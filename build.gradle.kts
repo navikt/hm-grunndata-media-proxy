@@ -5,7 +5,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val jvmTarget = "25"
 val micronautVersion = "5.0.6"
 val logbackEncoderVersion = "9.0"
-val imageIOJpgPluginVersion = "3.9.4"
+val imageIOJpgPluginVersion = "3.14.0"
 
 plugins {
     id("org.jetbrains.kotlin.jvm") version "2.3.21"
