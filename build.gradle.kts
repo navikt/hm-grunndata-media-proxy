@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val jvmTarget = "25"
-val micronautVersion = "5.0.6"
+val micronautVersion = "5.1.1"
 val logbackEncoderVersion = "9.0"
 val imageIOJpgPluginVersion = "3.14.0"
 
