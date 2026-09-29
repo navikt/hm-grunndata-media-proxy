@@ -5,10 +5,11 @@ import io.micronaut.cache.annotation.Cacheable
 import jakarta.inject.Singleton
 import org.slf4j.LoggerFactory
 import java.net.URI
+import io.micronaut.context.annotation.Value
 
 @Singleton
 @CacheConfig("files")
-open class FileHandler {
+open class FileHandler(@Value("\${media.storage.cdnurl}") private val cdnUrl: String) {
 
     companion object {
         private val LOG = LoggerFactory.getLogger(FileHandler::class.java)
@@ -17,7 +18,7 @@ open class FileHandler {
     @Cacheable(parameters = ["cachePath"])
     open fun createCachedFile(cachePath: String, sourceUri: URI): ByteArray {
         LOG.info("Creating cached $cachePath file for $sourceUri")
-        return sourceUri.toURL().openStream().use {
+        return CdnStream.use(sourceUri, cdnUrl) {
             it.readBytes()
         }
     }

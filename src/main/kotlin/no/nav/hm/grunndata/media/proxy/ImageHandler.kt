@@ -2,6 +2,7 @@ package no.nav.hm.grunndata.media.proxy
 
 import io.micronaut.cache.annotation.CacheConfig
 import io.micronaut.cache.annotation.Cacheable
+import io.micronaut.context.annotation.Value
 import jakarta.inject.Singleton
 import java.awt.Dimension
 import java.awt.color.ColorSpace
@@ -18,7 +19,7 @@ import org.slf4j.LoggerFactory
 
 @Singleton
 @CacheConfig("images")
-open class ImageHandler {
+open class ImageHandler(@Value("\${media.storage.cdnurl}") private val cdnUrl: String) {
 
     companion object {
         private val LOG = LoggerFactory.getLogger(ImageHandler::class.java)
@@ -44,10 +45,10 @@ open class ImageHandler {
     }
 
     private fun resizeImage(imageUri: URI, boundary: Dimension): BufferedImageMetaData {
-        imageUri.toURL().openStream().use {
+        return CdnStream.use(imageUri, cdnUrl) {
             val imageMeta = readImage(it)
             val image = imageMeta.bufferedImage
-            return if (image.width > boundary.width || image.height > boundary.height)
+            if (image.width > boundary.width || image.height > boundary.height)
                 resizeImage(imageMeta, boundary) else imageMeta
         }
     }
