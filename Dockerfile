@@ -3,9 +3,7 @@ FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/jre:openjdk-25-dev
 USER root
 
 COPY --from=runtime / /runtime/
-RUN apk --root /runtime \
-    --repositories-file /etc/apk/repositories \
-    --no-cache add jemalloc
+RUN apk --root /runtime --repositories-file /etc/apk/repositories --progress=plain --no-cache add jemalloc
 
 FROM runtime
 COPY --from=builder /runtime/ /
